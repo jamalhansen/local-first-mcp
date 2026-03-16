@@ -1,0 +1,12 @@
+.venv
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+.env
+.envrc
+CLAUDE.md
+uv.toml
+*.egg-info/
+dist/
+.ruff_cache/
