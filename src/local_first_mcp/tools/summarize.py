@@ -1,15 +1,19 @@
 """MCP tool: summarize_article — fetch a URL and write an Obsidian resource note."""
 
+import os
 from typing import Optional
 
 from local_first_mcp.server import mcp
+
+_DEFAULT_PROVIDER = os.environ.get("SUMMARIZE_PROVIDER") or os.environ.get("MODEL_PROVIDER", "ollama")
+_DEFAULT_MODEL = os.environ.get("SUMMARIZE_MODEL") or os.environ.get("MODEL") or None
 
 
 @mcp.tool()
 def summarize_article(
     url: str,
-    provider: str = "ollama",
-    model: Optional[str] = None,
+    provider: str = _DEFAULT_PROVIDER,
+    model: Optional[str] = _DEFAULT_MODEL,
 ) -> str:
     """Fetch an article URL and generate a structured Obsidian resource note.
 
@@ -21,8 +25,10 @@ def summarize_article(
 
     Args:
         url: The article URL to fetch and summarize.
-        provider: LLM provider to use (ollama, anthropic, groq, deepseek, gemini).
+        provider: LLM provider (ollama, anthropic, groq, deepseek, gemini).
+                  Defaults: SUMMARIZE_PROVIDER → MODEL_PROVIDER → "ollama".
         model: Override the provider's default model.
+               Defaults: SUMMARIZE_MODEL → MODEL → provider default.
     """
     from resource_summarizer import fetch_url, extract_note, build_note
     from local_first_common.providers import PROVIDERS

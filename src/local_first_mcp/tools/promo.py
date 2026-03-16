@@ -1,15 +1,19 @@
 """MCP tool: generate_promo — create multi-platform promotional copy for a blog post."""
 
+import os
 from typing import Optional
 
 from local_first_mcp.server import mcp
+
+_DEFAULT_PROVIDER = os.environ.get("PROMO_PROVIDER") or os.environ.get("MODEL_PROVIDER", "ollama")
+_DEFAULT_MODEL = os.environ.get("PROMO_MODEL") or os.environ.get("MODEL") or None
 
 
 @mcp.tool()
 def generate_promo(
     post_path: str,
-    provider: str = "ollama",
-    model: Optional[str] = None,
+    provider: str = _DEFAULT_PROVIDER,
+    model: Optional[str] = _DEFAULT_MODEL,
     platform: Optional[str] = None,
 ) -> str:
     """Generate platform-specific promotional copy for a blog post.
@@ -19,8 +23,10 @@ def generate_promo(
 
     Args:
         post_path: Absolute path to the blog post markdown file.
-        provider: LLM provider to use (ollama, anthropic, groq, deepseek, gemini).
+        provider: LLM provider (ollama, anthropic, groq, deepseek, gemini).
+                  Defaults: PROMO_PROVIDER → MODEL_PROVIDER → "ollama".
         model: Override the provider's default model.
+               Defaults: PROMO_MODEL → MODEL → provider default.
         platform: Generate for one platform only (e.g. "twitter", "linkedin").
                   If omitted, generates for all configured platforms.
     """
