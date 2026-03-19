@@ -10,3 +10,6 @@ uv.toml
 *.egg-info/
 dist/
 .ruff_cache/
+
+# local-first security requirements
+.DS_Store

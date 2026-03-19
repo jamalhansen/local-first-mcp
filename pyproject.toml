@@ -8,7 +8,6 @@ authors = [
 requires-python = ">=3.12"
 dependencies = [
     "mcp[cli]>=1.0.0",
-    "local-first-common",
     "resource-summarizer",
     "promo-generator",
     "vault-semantic-search",
@@ -25,7 +24,6 @@ build-backend = "hatchling.build"
 packages = ["src/local_first_mcp"]
 
 [tool.uv.sources]
-local-first-common = { git = "https://github.com/jamalhansen/local-first-common.git", rev = "main" }
 resource-summarizer = { path = "../resource-summarizer", editable = true }
 promo-generator = { path = "../promo-generator", editable = true }
 vault-semantic-search = { path = "../vault-semantic-search", editable = true }
