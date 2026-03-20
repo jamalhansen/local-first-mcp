@@ -24,6 +24,7 @@ build-backend = "hatchling.build"
 packages = ["src/local_first_mcp"]
 
 [tool.uv.sources]
+local-first-common = { path = "../local-first-common", editable = true }
 resource-summarizer = { path = "../resource-summarizer", editable = true }
 promo-generator = { path = "../promo-generator", editable = true }
 vault-semantic-search = { path = "../vault-semantic-search", editable = true }
