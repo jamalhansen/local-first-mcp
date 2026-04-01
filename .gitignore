@@ -13,3 +13,8 @@ dist/
 
 # local-first security requirements
 .DS_Store
+
+# Workspace standard ignores
+*.pyd
+.coverage
+.pytest_cache/
